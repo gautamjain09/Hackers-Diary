@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "828456527027",
+    "project_id": "hackers-diary",
+    "storage_bucket": "hackers-diary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828456527027:android:d0b8c20c372aa1054bbcc6",
+        "android_client_info": {
+          "package_name": "com.gautam.hackers_diary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828456527027-5csqi981t60t2nvpbpu0293qp2ehg90s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANOiRfdYjm_3iscDg8_oLioX7nAMLr3og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828456527027-5csqi981t60t2nvpbpu0293qp2ehg90s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "828456527027-abt445c56rk2k71n5vc6lk2603mdr6t4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gautam.hackersDiary"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
