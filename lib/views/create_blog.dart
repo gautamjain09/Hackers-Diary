@@ -78,7 +78,7 @@ class _CreateBlogState extends State<CreateBlog> {
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Icon(Icons.file_upload_rounded),
+              child: const Icon(Icons.send_outlined),
             ),
           ),
         ],
@@ -88,73 +88,75 @@ class _CreateBlogState extends State<CreateBlog> {
               alignment: Alignment.center,
               child: const CircularProgressIndicator(),
             )
-          : Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      getImage();
-                    },
-                    child: selectedImage != null
-                        ? Container(
-                            height: 150,
-                            width: MediaQuery.of(context).size.width,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image(
-                                image: XFileImage(selectedImage!),
-                                fit: BoxFit.cover,
+          : SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(15.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        getImage();
+                      },
+                      child: selectedImage != null
+                          ? Container(
+                              height: 160,
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image(
+                                  image: XFileImage(selectedImage!),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              height: 150,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: const Center(
+                                child: Icon(Icons.add_a_photo),
                               ),
                             ),
-                          )
-                        : Container(
-                            height: 150,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Center(
-                              child: Icon(Icons.add_a_photo),
-                            ),
-                          ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(16),
-                  child: TextField(
-                    onChanged: (String? val) {
-                      authorName = val!;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Author Name",
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(16),
-                  child: TextField(
-                    onChanged: (String? val) {
-                      title = val!;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Title",
+                  Container(
+                    margin: const EdgeInsets.all(16),
+                    child: TextField(
+                      onChanged: (String? val) {
+                        authorName = val!;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Author Name",
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(16),
-                  child: TextField(
-                    onChanged: (String? val) {
-                      description = val!;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: "Description",
+                  Container(
+                    margin: const EdgeInsets.all(16),
+                    child: TextField(
+                      onChanged: (String? val) {
+                        title = val!;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Title",
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    margin: const EdgeInsets.all(16),
+                    child: TextField(
+                      onChanged: (String? val) {
+                        description = val!;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Description",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
     );
   }
