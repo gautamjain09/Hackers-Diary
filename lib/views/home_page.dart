@@ -13,8 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   CrudMethods crudMethods = new CrudMethods();
 
-  Stream? blogsStream =
-      FirebaseFirestore.instance.collection("Blogs").snapshots();
+  Stream? blogsStream;
 
   Widget BlogList() {
     return Container(
@@ -51,6 +50,16 @@ class _HomePageState extends State<HomePage> {
               child: const CircularProgressIndicator(),
             ),
     );
+  }
+
+  @override
+  void initState() {
+    crudMethods.getData().then((result) {
+      setState(() {
+        blogsStream = result;
+      });
+    });
+    super.initState();
   }
 
   @override
