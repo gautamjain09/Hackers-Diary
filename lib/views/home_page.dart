@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hackers_diary/services/firebase_crud.dart';
 import 'package:hackers_diary/views/create_blog.dart';
 
@@ -18,32 +19,37 @@ class _HomePageState extends State<HomePage> {
   Widget BlogList() {
     return Container(
       child: blogsStream != null
-          ? Column(
-              children: <Widget>[
-                StreamBuilder(
-                  stream: blogsStream,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        return BlogsTile(
-                          imageUrl: snapshot.data!.docs[index]["ImageUrl"],
-                          authorName: snapshot.data!.docs[index]["AuthorName"],
-                          title: snapshot.data!.docs[index]["Title"],
-                          description: snapshot.data!.docs[index]
-                              ["Description"],
+          ? SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: <Widget>[
+                  StreamBuilder(
+                    stream: blogsStream,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
                         );
-                      },
-                    );
-                  },
-                )
-              ],
+                      }
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          return BlogsTile(
+                            imageUrl: snapshot.data!.docs[index]["ImageUrl"],
+                            authorName: snapshot.data!.docs[index]
+                                ["AuthorName"],
+                            title: snapshot.data!.docs[index]["Title"],
+                            description: snapshot.data!.docs[index]
+                                ["Description"],
+                          );
+                        },
+                      );
+                    },
+                  )
+                ],
+              ),
             )
           : Container(
               alignment: Alignment.center,
