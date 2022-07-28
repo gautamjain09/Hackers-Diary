@@ -10,6 +10,9 @@
 .svn/
 migrate_working_dir/
 
+# Google API keys related
+/ios/Runner/GoogleService-Info.plist 
+
 # IntelliJ related
 *.iml
 *.ipr
