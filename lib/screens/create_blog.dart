@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:cross_file_image/cross_file_image.dart'; // for Xfile -> file
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hackers_diary/services/firebase_crud.dart';
+import 'package:hackers_diary/controllers/firebase_crud.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 
@@ -15,21 +15,18 @@ class CreateBlog extends StatefulWidget {
 
 class _CreateBlogState extends State<CreateBlog> {
   late String authorName, title, description;
-
+  CrudMethods crudMethods = CrudMethods();
   bool isLoading = false;
 
-  // Picking Image From gallery
   XFile? selectedImage;
   Future getImage() async {
-    final XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final XFile? image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     setState(() {
       selectedImage = image;
     });
   }
-
-  // Uploading Blog to Firebase Storage
-  CrudMethods crudMethods = new CrudMethods();
 
   void uploadBlog() async {
     // Progress Bar
@@ -44,7 +41,6 @@ class _CreateBlogState extends State<CreateBlog> {
           .child("${randomAlphaNumeric(10)}.jpg");
 
       UploadTask task = ref.putFile(File(selectedImage!.path));
-
       TaskSnapshot snapshot = await task;
       var imageUrl = await snapshot.ref.getDownloadURL();
 
@@ -58,7 +54,9 @@ class _CreateBlogState extends State<CreateBlog> {
       crudMethods.addData(blogmap).then(
             (value) => Navigator.of(context).pop(),
           );
-    } else {}
+    } else {
+      // print Error
+    }
   }
 
   @override
@@ -90,7 +88,7 @@ class _CreateBlogState extends State<CreateBlog> {
             )
           : SingleChildScrollView(
               child: Column(
-                children: <Widget>[
+                children: [
                   Container(
                     padding: const EdgeInsets.all(15.0),
                     child: GestureDetector(
@@ -98,7 +96,7 @@ class _CreateBlogState extends State<CreateBlog> {
                         getImage();
                       },
                       child: selectedImage != null
-                          ? Container(
+                          ? SizedBox(
                               height: 160,
                               width: MediaQuery.of(context).size.width,
                               child: ClipRRect(

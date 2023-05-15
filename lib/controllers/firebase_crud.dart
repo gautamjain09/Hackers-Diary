@@ -1,14 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CrudMethods {
   Future<void> addData(blogData) async {
-    FirebaseFirestore.instance
-        .collection("Blogs")
-        .add(blogData)
-        .catchError((e) {
+    try {
+      FirebaseFirestore.instance.collection("Blogs").add(blogData);
+    } on FirebaseException catch (e) {
       print(e);
-    });
+    }
   }
 
   getData() async {

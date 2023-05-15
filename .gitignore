@@ -12,6 +12,8 @@ migrate_working_dir/
 
 # Google API keys related
 /ios/Runner/GoogleService-Info.plist 
+/android/app/google-services.json
+.gitignore
 
 # IntelliJ related
 *.iml
